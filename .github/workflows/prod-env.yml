@@ -5,6 +5,7 @@ env:
   USER: 'fiomarketplace'
   RM_DEPLOY_PATH: 'rm -r /home/fiomarketplace/www/middleware/prod/*'
   DEPLOY_PATH: '/home/fiomarketplace/www/middleware/prod'
+  PM2_COMMAND: 'pm2 start ./start.sh --name="Marketplace Middleware"'
 
 on:
   push:
@@ -66,3 +67,12 @@ jobs:
           remotePath: ${{ env.DEPLOY_PATH }}
           privateKey: ${{ secrets.TEST_ENV_PRIV }}
           privateKeyIsFile: false
+
+      - name: Run script with PM2
+        uses: D3rHase/ssh-command-action@v0.2
+        with:
+          HOST: ${{ env.HOST }}
+          PORT: ${{ env.PORT }}
+          USER: ${{ env.USER }}
+          PRIVATE_SSH_KEY: ${{ secrets.TEST_ENV_PRIV }}
+          COMMAND: ${{ env.PM2_COMMAND }}
