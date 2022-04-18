@@ -46,9 +46,6 @@ jobs:
         run: |
           npm ci
 
-      - name: Build angular
-        run: npm run build --configuration=production
-
       - name: Delete previous build
         uses: D3rHase/ssh-command-action@v0.2
         with:
@@ -65,7 +62,8 @@ jobs:
           host: ${{ env.HOST }}
           port: ${{ env.PORT }}
           username: ${{ env.USER }}
-          localPath: './dist/fiomarketplace'
+          localPath: './'
           remotePath: ${{ env.DEPLOY_PATH }}
           privateKey: ${{ secrets.TEST_ENV_PRIV }}
           privateKeyIsFile: false
+

@@ -1,23 +1,18 @@
-# Use this as a reference for calling an API endpoint as an step in a workflow action.
-# https://www.freecodecamp.org/news/how-to-use-github-actions-to-call-webhooks/
-
 name: CI-Test-Env
+env:
+  HOST: '173.198.252.200'
+  PORT: 22
+  USER: 'fiomarketplace'
+  RM_DEPLOY_PATH: 'rm -r /home/fiomarketplace/www/middleware/test/*'
+  DEPLOY_PATH: '/home/fiomarketplace/www/middleware/test'
 
 on:
   push:
     branches:
-      - 'feature/**'
-  workflow_dispatch:
+      - 'feature/*'
 
 jobs:
   build_deploy:
-    env:
-      TEST_ENV_PRIV: ${{ secrets.TEST_ENV_PRIV }}
-      HOST: '173.198.252.200'
-      PORT: 22
-      USER: 'fiomarketplace'
-      RM_DEPLOY_PATH: 'rm -r /home/fiomarketplace/www/middleware/test/*'
-      DEPLOY_PATH: '/home/fiomarketplace/www/middleware/test'
     runs-on: ubuntu-latest
     name: Build and Upload
     steps:
@@ -48,9 +43,6 @@ jobs:
         run: |
           npm ci
 
-      - name: Build angular
-        run: npm run build
-
       - name: Delete previous build
         uses: D3rHase/ssh-command-action@v0.2
         with:
@@ -67,7 +59,7 @@ jobs:
           host: ${{ env.HOST }}
           port: ${{ env.PORT }}
           username: ${{ env.USER }}
-          localPath: './dist/fiomarketplace'
+          localPath: './'
           remotePath: ${{ env.DEPLOY_PATH }}
           privateKey: ${{ secrets.TEST_ENV_PRIV }}
           privateKeyIsFile: false
