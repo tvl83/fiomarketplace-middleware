@@ -5,6 +5,8 @@ env:
   USER: 'fiomarketplace'
   RM_DEPLOY_PATH: 'rm -r /home/fiomarketplace/www/middleware/test/*'
   DEPLOY_PATH: '/home/fiomarketplace/www/middleware/test'
+  INSTALL_DEPS: 'cd /home/fiomarketplace/www/middleware/test && npm install'
+  START_PM2: 'cd /home/fiomarketplace/www/middleware/test && pm2 delete "Marketplace Middleware - TEST" && pm2 start ./start.sh name="Marketplace Middleware - TEST"'
 
 on:
   push:
@@ -54,3 +56,12 @@ jobs:
           USER: ${{ env.USER }}
           PRIVATE_SSH_KEY: ${{ secrets.TEST_ENV_PRIV }}
           COMMAND: ${{ env.INSTALL_DEPS }}
+
+      - name: Start PM2
+        uses: D3rHase/ssh-command-action@v0.2
+        with:
+          HOST: ${{ env.HOST }}
+          PORT: ${{ env.PORT }}
+          USER: ${{ env.USER }}
+          PRIVATE_SSH_KEY: ${{ secrets.TEST_ENV_PRIV }}
+          COMMAND: ${{ env.START_PM2 }}
