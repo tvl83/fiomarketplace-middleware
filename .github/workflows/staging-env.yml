@@ -34,7 +34,7 @@ jobs:
           username: ${{ env.USER }}
           key: ${{ secrets.TEST_ENV_PRIV }}
           script: |
-            cd /home/fiomarketplace/www/middleware/prod
+            cd /home/fiomarketplace/www/middleware/staging
             git pull
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh                
