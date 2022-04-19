@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec ts-node ./src/index.ts",
-    "testnet": "PORT=3033 API_HOST=\"https://fio-test.eosblocksmith.io\" ts-node ./src/index.ts",
+    "testnet": "PORT=3033 API_HOST=\"https://fio-testnet.eosblocksmith.io\" ts-node ./src/index.ts",
     "staging": "PORT=5033 API_HOST=\"https://fio-mainnet.eosblocksmith.io\" ts-node ./src/index.ts",
     "prod": "PORT=4033 API_HOST=\"https://fio-mainnet.eosblocksmith.io\" ts-node ./src/index.ts"
   },
