@@ -5,11 +5,14 @@ env:
   USER: 'fiomarketplace'
   RM_DEPLOY_PATH: 'rm -r /home/fiomarketplace/www/middleware/test/*'
   DEPLOY_PATH: '/home/fiomarketplace/www/middleware/test'
+  INSTALL_DEPS: 'cd /home/fiomarketplace/www/middleware/test && npm install'
+  START_PM2: 'cd /home/fiomarketplace/www/middleware/test && pm2 delete "Marketplace Middleware - TEST" && pm2 start ./start.sh name="Marketplace Middleware - TEST"'
 
 on:
   push:
     branches:
       - 'feature/*'
+  workflow_dispatch:
 
 jobs:
   build_deploy:
