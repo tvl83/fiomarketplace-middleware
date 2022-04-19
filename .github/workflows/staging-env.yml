@@ -5,7 +5,7 @@ env:
   USER: 'fiomarketplace'
   RM_DEPLOY_PATH: 'rm -r /home/fiomarketplace/www/middleware/staging/*'
   DEPLOY_PATH: '/home/fiomarketplace/www/middleware/staging'
-  INSTALL_DEPS: 'npm install'
+  INSTALL_DEPS: 'cd /home/fiomarketplace/www/middleware/staging && npm install'
 
 on:
   pull_request:
