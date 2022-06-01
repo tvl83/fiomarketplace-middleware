@@ -7,12 +7,9 @@ env:
   DEPLOY_PATH: '/home/fiomarketplace/www/middleware/staging'
 
 on:
-  pull_request:
-    types:
-      - opened
+  push:
     branches:
       - 'releases/**'
-  workflow_dispatch:
 
 jobs:
   build_deploy:
